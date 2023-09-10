@@ -20,6 +20,7 @@ import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
 import { useState } from "react";
 import toast from "react-hot-toast";
+import { redirect } from "next/navigation";
 
 const formSchema = z.object({
   name: z.string().min(1),
@@ -43,8 +44,10 @@ export const StoreModal = () => {
     try {
       setIsLoading(true);
       const response = await axios.post("/api/stores", data);
-      toast.success("Store created!");
-      form.reset();
+      window.location.assign(`/${response.data.id}`);
+      // this is going to do a complete refresh in our page
+      // it will wait for database result and not show model before the
+      // database is populated
     } catch (error) {
       toast.error("Something went wrong!");
     } finally {
