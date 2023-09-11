@@ -38,6 +38,7 @@ type SettingsFormValues = z.infer<typeof formSchema>;
 const SettingsForm: FC<SettingsFormProps> = ({ initialData }) => {
   const params = useParams();
   const router = useRouter();
+  const origin = useOrigin();
 
   const [open, setOpen] = useState<boolean>(false);
   const [isLoading, setIsLoading] = useState<boolean>(false);
@@ -129,7 +130,7 @@ const SettingsForm: FC<SettingsFormProps> = ({ initialData }) => {
 
       <ApiAlert
         title="NEXT_PUBLIC_API_URL"
-        description={`${useOrigin()}/api/${params.storeId}`}
+        description={`${origin}/api/${params.storeId}`}
         variant="public"
       />
     </>
