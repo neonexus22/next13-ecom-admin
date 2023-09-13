@@ -8,6 +8,7 @@ import { Plus } from "lucide-react";
 import { useParams, useRouter } from "next/navigation";
 import { FC } from "react";
 import { BillboardColumn, columns } from "./columns";
+import ApiList from "@/components/ui/api-list";
 
 type BillboardClientProps = {
   data: BillboardColumn[];
@@ -32,6 +33,9 @@ const BillboardClient: FC<BillboardClientProps> = ({ data }) => {
       </div>
       <Separator />
       <DataTable columns={columns} data={data} searchKey="label" />
+      <Heading title="API" description="API calls for Billboards" />
+      <Separator />
+      <ApiList entityName="billboards" entityIdName="billboardId" />
     </>
   );
 };
