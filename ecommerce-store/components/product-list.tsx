@@ -1,7 +1,7 @@
 import { Product } from "@/types";
 import React, { FC } from "react";
 import NoResults from "@/components/ui/no-results";
-import ProductCard from "@/components/ui/product-cart";
+import ProductCard from "@/components/ui/product-card";
 
 type ProductListProps = {
   items: Product[];
