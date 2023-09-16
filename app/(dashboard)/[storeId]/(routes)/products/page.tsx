@@ -5,21 +5,30 @@ import { formatter } from "@/lib/utils";
 
 import { ProductsClient } from "./components/client";
 import { ProductColumn } from "./components/columns";
+import { Category, Color, Product, Size } from "@prisma/client";
+
+type ProductType = { category: Category; size: Size; color: Color } & Product;
 
 const ProductsPage = async ({ params }: { params: { storeId: string } }) => {
-  const products = await prismadb.product.findMany({
-    where: {
-      storeId: params.storeId,
-    },
-    include: {
-      category: true,
-      size: true,
-      color: true,
-    },
-    orderBy: {
-      createdAt: "desc",
-    },
-  });
+  let products: ProductType[] = [];
+
+  try {
+    products = await prismadb.product.findMany({
+      where: {
+        storeId: params.storeId,
+      },
+      include: {
+        category: true,
+        size: true,
+        color: true,
+      },
+      orderBy: {
+        createdAt: "desc",
+      },
+    });
+  } catch (error) {
+    console.log({ error });
+  }
 
   console.log({ products });
 
